@@ -1,0 +1,79 @@
+definitions:
+  models.Book:
+    properties:
+      created_at:
+        type: integer
+      description:
+        type: string
+      id:
+        type: string
+      price:
+        type: number
+      title:
+        type: string
+      updated_at:
+        type: integer
+    type: object
+  models.BookInput:
+    properties:
+      description:
+        type: string
+      price:
+        type: number
+      title:
+        type: string
+    type: object
+host: localhost:2050
+info:
+  contact: {}
+  description: This is a sample server celler server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Gin Rabbit Elastic
+  version: "1.0"
+paths:
+  /api/v1/book/create:
+    post:
+      consumes:
+      - application/json
+      description: add book
+      parameters:
+      - description: query params
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.BookInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Book'
+      summary: Add Book
+      tags:
+      - Book
+  /api/v1/book/getOne/{id}:
+    get:
+      consumes:
+      - application/json
+      description: get book
+      parameters:
+      - description: Note ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Book'
+      summary: get Book
+      tags:
+      - Book
+swagger: "2.0"
